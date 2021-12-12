@@ -1,8 +1,9 @@
 #!/usr/bin/ruby
 
-fname = 'input'
-fname = 'input1'
 fname = 'inputc'
+fname = 'input1'
+fname = 'input2'
+fname = 'input'
 
 rules = Hash.new()
 rulesO = Hash.new()
@@ -57,19 +58,19 @@ def bagContains(rules,bag)
   k=bag
   v=rules[k]
     puts "#{k} #{v}"
-    if v==nil#.include? 0
-      puts "Found zero: #{k} #{v}"
-      sum=1
+    if v.include? 0
+      #puts "Found zero: #{k} #{v}"
+      sum=0
+      #puts "base case returns #{sum}"
       return sum
     else
-      puts "Found desired bag #{k}, which contains #{v}"
-      puts v.length
-      if sum == nil
-        sum=0
-      end
-      for i in 0..(v.length/2)
-        puts "i equals #{i},adding #{v[(i*2+1)]} of  #{v[(i*2)]}"
-        sum=sum+(v[(i*2)+1].to_i*(bagContains(rules,v[i*2]).to_i))
+      #puts "Found desired bag #{k}, which contains #{v}"
+      #puts v.length
+      if sum == nil; sum=0; end
+      for i in 0..((v.length/2)-1)
+        count=v[(i*2+1)];type=v[(i*2)]
+        #puts "i equals #{i},adding #{count} of #{type}"
+        sum=sum+count.to_i+count.to_i*(bagContains(rules,type).to_i)
       end
       return sum
     end
@@ -83,8 +84,8 @@ end
 #puts BH.uniq.length
 #puts BH.uniq.inspect
 #puts bagholds(rules,"shiny gold",baglist).length
-#puts bagContains(rules,"shiny gold")
-puts bagContains(rules,"faded blue")
+puts bagContains(rules,"shiny gold")
+#puts bagContains(rules,"faded blue")
 #puts bagContains(rules,"dark olive")
 #puts bagContains(rules,"poopy purple")
 #puts bagContains(rules,"muted yellow")
